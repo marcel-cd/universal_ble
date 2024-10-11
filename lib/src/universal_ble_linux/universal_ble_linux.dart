@@ -102,9 +102,8 @@ class UniversalBleLinux extends UniversalBlePlatform {
   Future<void> stopScan() async {
     await _ensureInitialized();
     try {
-      if (_activeAdapter?.discovering == true) {
-        await _activeAdapter?.stopDiscovery();
-      }
+      // _activeAdapter?.discovering always false, so we can't use it to check if scan is running
+      await _activeAdapter?.stopDiscovery();
       // Clean all advertiseemnt listeners
       _deviceAdvertisementSubscriptions.removeWhere((e, value) {
         value.cancel();
